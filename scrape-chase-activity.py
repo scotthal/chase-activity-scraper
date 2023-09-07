@@ -1,4 +1,5 @@
 # /usr/bin/env python3
+import argparse
 import csv
 import re
 
@@ -62,7 +63,13 @@ def output_csv_records(file, output_record_list):
 
 
 def main():
-    with open('activity.html', encoding='utf-8') as i:
+    parser = argparse.ArgumentParser(
+        description='Scrape activity data from a chase.com UI snapshot')
+    parser.add_argument('input_html', help='input HTML file')
+    parser.add_argument('output_csv', help='output CSV file')
+    args = parser.parse_args()
+
+    with open(args.input_html, encoding='utf-8') as i:
         table_rows = get_html_table_rows(i)
 
     output_record_list = [['Type', 'Transaction Date', 'Post Date', 'Description',
@@ -71,7 +78,7 @@ def main():
         record_string = get_record_string(table_row)
         output_record_list.append(output_row(parse_row(record_string)))
 
-    with open('activity.csv', 'w', newline='') as o:
+    with open(args.output_csv, 'w', newline='') as o:
         output_csv_records(o, output_record_list)
 
 
