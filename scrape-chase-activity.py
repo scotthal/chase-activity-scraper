@@ -1,6 +1,5 @@
 # /usr/bin/env python3
 import csv
-import io
 import re
 
 from bs4 import BeautifulSoup
