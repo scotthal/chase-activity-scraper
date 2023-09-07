@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:3.11.5
 
 ARG USERNAME=scotthal
 ARG USER_UID=1100
