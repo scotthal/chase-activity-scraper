@@ -5,6 +5,21 @@ import re
 from bs4 import BeautifulSoup
 
 
+class OutputRecordFormatter:
+    def __init__(self):
+        pass
+
+    def format_header(self):
+        return ["Date", "Description", "Amount"]
+
+    def format_output_record(self, output_record):
+        return [
+            output_record['date'],
+            output_record['description'],
+            output_record['amount']
+        ]
+
+
 class Chase:
     def __init__(self, input_html, output_csv, output_formatter):
         self.input_html = input_html
@@ -40,13 +55,13 @@ class Chase:
         if (len(amount_components) < 2):
             raise SyntaxError(
                 'Too few fields in record: {}'.format(input_record_string))
-        negative_amount = ''.join(
+        amount = ''.join(
             amount_components[:len(amount_components) - 1])
 
         return {
             'date': date,
             'description': description,
-            'negative_amount': negative_amount,
+            'amount': amount,
         }
 
     def scrape(self):

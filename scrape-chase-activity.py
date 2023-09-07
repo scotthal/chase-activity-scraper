@@ -3,7 +3,7 @@ import argparse
 import scrape.chase
 
 
-class ChaseOutputFormatter:
+class ChaseOutputFormatter(scrape.chase.OutputRecordFormatter):
     def __init__(self):
         pass
 
@@ -18,7 +18,7 @@ class ChaseOutputFormatter:
             output_record['date'],
             output_record['description'],
             '',
-            output_record['negative_amount'],
+            output_record['amount'],
             '',
             '',
         ]
