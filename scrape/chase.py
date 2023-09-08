@@ -3,7 +3,13 @@ import csv
 import re
 
 from bs4 import BeautifulSoup
+from dataclasses import dataclass
 
+@dataclass
+class OutputRecord:
+    date: str
+    description: str
+    amount: str
 
 class OutputRecordFormatter:
     def __init__(self):
@@ -12,11 +18,11 @@ class OutputRecordFormatter:
     def format_header(self):
         return ["Date", "Description", "Amount"]
 
-    def format_output_record(self, output_record):
+    def format_output_record(self, output_record: OutputRecord):
         return [
-            output_record['date'],
-            output_record['description'],
-            output_record['amount']
+            output_record.date,
+            output_record.description,
+            output_record.amount
         ]
 
 
@@ -58,11 +64,7 @@ class Chase:
         amount = ''.join(
             amount_components[:len(amount_components) - 1])
 
-        return {
-            'date': date,
-            'description': description,
-            'amount': amount,
-        }
+        return OutputRecord(date, description, amount)
 
     def scrape(self):
         input_table_rows = self.get_html_table_rows()
