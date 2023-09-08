@@ -58,7 +58,7 @@ class Chase:
         components = input_record_string.split('$')
         if (len(components) != 2):
             raise SyntaxError(
-                'More than one $ character in record: {}'.format(input_record_string))
+                'Expected exactly one $ character in record: {}'.format(input_record_string))
 
         other_components = components[0].split(',')
         if (len(other_components) < 3):
