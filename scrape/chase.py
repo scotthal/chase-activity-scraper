@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from dataclasses import dataclass
 from io import TextIOWrapper
-from typing import Any
 import csv
 import re
 

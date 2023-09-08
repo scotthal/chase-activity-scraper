@@ -19,7 +19,9 @@ class OldChaseOutputFormatter(scrape.chase.OutputRecordFormatter):
             'Additional Description',
             'Category']
 
-    def format_output_record(self, output_record: scrape.chase.OutputRecord) -> list[str]:
+    def format_output_record(
+            self,
+            output_record: scrape.chase.OutputRecord) -> list[str]:
         return [
             'Sale',
             output_record.date,
