@@ -48,5 +48,5 @@ def main() -> None:
             chase_scraper.scrape()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
