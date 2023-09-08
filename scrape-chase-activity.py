@@ -5,10 +5,10 @@ import scrape.chase
 
 
 class OldChaseOutputFormatter(scrape.chase.OutputRecordFormatter):
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
-    def format_header(self):
+    def format_header(self) -> list[str]:
         return [
             'Type',
             'Transaction Date',
@@ -19,7 +19,7 @@ class OldChaseOutputFormatter(scrape.chase.OutputRecordFormatter):
             'Additional Description',
             'Category']
 
-    def format_output_record(self, output_record: scrape.chase.OutputRecord):
+    def format_output_record(self, output_record: scrape.chase.OutputRecord) -> list[str]:
         return [
             'Sale',
             output_record.date,
@@ -32,7 +32,7 @@ class OldChaseOutputFormatter(scrape.chase.OutputRecordFormatter):
         ]
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description='Scrape activity data from a chase.com UI snapshot')
     parser.add_argument('input_html', help='input HTML file')
