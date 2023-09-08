@@ -1,5 +1,6 @@
 # /usr/bin/env python3
 import argparse
+
 import scrape.chase
 
 
@@ -8,8 +9,15 @@ class OldChaseOutputFormatter(scrape.chase.OutputRecordFormatter):
         pass
 
     def format_header(self):
-        return ['Type', 'Transaction Date', 'Post Date', 'Description',
-                'Amount', 'Negative Amount', 'Additional Description', 'Category']
+        return [
+            'Type',
+            'Transaction Date',
+            'Post Date',
+            'Description',
+            'Amount',
+            'Negative Amount',
+            'Additional Description',
+            'Category']
 
     def format_output_record(self, output_record: scrape.chase.OutputRecord):
         return [

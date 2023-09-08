@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
+from dataclasses import dataclass
 import csv
 import re
 
 from bs4 import BeautifulSoup
-from dataclasses import dataclass
+
 
 @dataclass
 class OutputRecord:
     date: str
     description: str
     amount: str
+
 
 class OutputRecordFormatter:
     def __init__(self):
