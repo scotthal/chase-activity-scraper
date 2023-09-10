@@ -1,6 +1,8 @@
 # /usr/bin/env python3
 import argparse
 
+from bs4 import BeautifulSoup
+
 import scrape.chase
 
 
@@ -43,8 +45,9 @@ def main() -> None:
 
     with open(args.input_html, encoding='utf-8') as input_html:
         with open(args.output_csv, 'w', newline='') as output_csv:
+            activity_soup = BeautifulSoup(input_html, 'html.parser')
             chase_scraper = scrape.chase.Chase(
-                input_html, output_csv, OldChaseOutputFormatter())
+                activity_soup, output_csv, OldChaseOutputFormatter())
             chase_scraper.scrape()
 
 

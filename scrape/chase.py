@@ -34,21 +34,20 @@ class OutputRecordFormatter:
 class Chase:
     def __init__(
             self,
-            input_html: TextIOWrapper,
+            activity_soup: BeautifulSoup,
             output_csv: TextIOWrapper,
             output_formatter: OutputRecordFormatter) -> None:
-        self.input_html = input_html
+        self.activity_soup = activity_soup
         self.output_csv = output_csv
         self.output_csv_writer = csv.writer(self.output_csv)
         self.output_formatter = output_formatter
 
     def get_html_table_rows(self) -> ResultSet[Tag]:
-        activity_soup = BeautifulSoup(self.input_html, 'html.parser')
         criteria = {
             'id': re.compile('^ACTIVITY.+'),
             'class': 'mds-activity-table__row',
         }
-        return activity_soup.find_all(attrs=criteria)
+        return self.activity_soup.find_all(attrs=criteria)
 
     def get_record_string(self, row: Tag) -> str | list[str] | None:
         return row.get('data-values')

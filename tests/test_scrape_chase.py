@@ -2,6 +2,8 @@
 import io
 import unittest
 
+from bs4 import BeautifulSoup
+
 from .context import Chase
 from .context import OutputRecord
 from .context import OutputRecordFormatter
@@ -49,7 +51,8 @@ class TestChase(unittest.TestCase):
 
         with io.StringIO(html) as html_input:
             with io.StringIO() as csv_output:
-                Chase(html_input, csv_output, formatter).scrape()
+                soup = BeautifulSoup(html_input, 'html.parser')
+                Chase(soup, csv_output, formatter).scrape()
                 self.assertEqual(csv_output.getvalue(), expected_output)
 
     def test_parse_too_many_dollar_signs(self) -> None:
@@ -59,8 +62,9 @@ class TestChase(unittest.TestCase):
 
         with io.StringIO(html) as html_input:
             with io.StringIO() as csv_output:
+                soup = BeautifulSoup(html_input, 'html.parser')
                 with self.assertRaises(SyntaxError):
-                    Chase(html_input, csv_output, formatter).scrape()
+                    Chase(soup, csv_output, formatter).scrape()
 
     def test_parse_too_few_dollar_signs(self) -> None:
         html = self.test_chase_html.format(
@@ -69,8 +73,9 @@ class TestChase(unittest.TestCase):
 
         with io.StringIO(html) as html_input:
             with io.StringIO() as csv_output:
+                soup = BeautifulSoup(html_input, 'html.parser')
                 with self.assertRaises(SyntaxError):
-                    Chase(html_input, csv_output, formatter).scrape()
+                    Chase(soup, csv_output, formatter).scrape()
 
 
 if __name__ == '__main__':
